@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
-
+        classpath 'com.novoda:bintray-release:0.3.4'//添加
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -20,4 +20,25 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+//添加
+ext {
+    userOrg = 'deemonser'
+    groupId = 'com.deemons'
+    uploadName = 'ModuleRouter'
+    publishVersion = '1.0.0'
+    desc = 'An easy to modular development tool library'
+    website = 'https://github.com/Deemonser/MouduleRouter.git'
+    licences = ['Apache-2.0']
+}
+
+allprojects {
+    tasks.withType(Javadoc) {
+        options{
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
 }
