@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'//添加
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.Deemonser'
 
 android {
     compileSdkVersion 25
@@ -67,17 +68,24 @@ dependencies {
 //        exclude '**/R.java'
 //    }
 //}
-//
 
 
-//添加
-publish {
-    artifactId = 'modulerouter-core'
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    uploadName = rootProject.uploadName
-    publishVersion = rootProject.publishVersion
-    desc = rootProject.description
-    website = rootProject.website
-    licences = rootProject.licences
-}
+
+////添加
+//publish {
+//    artifactId = 'modulerouter-core'
+//    userOrg = rootProject.userOrg
+//    groupId = rootProject.groupId
+//    uploadName = rootProject.uploadName
+//    publishVersion = rootProject.publishVersion
+//    desc = rootProject.description
+//    website = rootProject.website
+//    licences = rootProject.licences
+//    dryRun = rootProject.dryRun
+//}
+
+//task copyJar(type: Copy) {
+//    from('build/libs/permission-lib.jar')
+//    into('../output/')
+//    rename ('permission-lib.jar', 'mpermissions.jar')
+//}

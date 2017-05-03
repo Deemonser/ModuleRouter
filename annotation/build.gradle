@@ -1,5 +1,6 @@
 apply plugin: 'java'
-//apply plugin: 'bintray-release'//添加
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.Deemonser'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,7 +9,7 @@ dependencies {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-//添加
+
 //publish {
 //    artifactId = 'modulerouter-annotation'
 //    userOrg = rootProject.userOrg
@@ -18,4 +19,5 @@ targetCompatibility = "1.7"
 //    desc = rootProject.description
 //    website = rootProject.website
 //    licences = rootProject.licences
+//    dryRun = rootProject.dryRun
 //}

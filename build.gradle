@@ -9,7 +9,7 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-        classpath 'com.novoda:bintray-release:0.4.0'//添加
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -32,6 +32,7 @@ ext {
     desc = 'An easy to modular development tool library'
     website = 'https://github.com/Deemonser/MouduleRouter.git'
     licences = ['Apache-2.0']
+    dryRun = 'false'
 }
 
 allprojects {
