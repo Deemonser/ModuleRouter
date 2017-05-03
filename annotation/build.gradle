@@ -1,5 +1,5 @@
 apply plugin: 'java'
-//apply plugin: 'bintray-release'//添加
+apply plugin: 'bintray-release'//添加
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,29 +8,16 @@ dependencies {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-//for upload
-//ext {
-//    bintrayRepo = 'maven'
-//    bintrayName = 'modulerouter-annotation'
-//
-//    publishedGroupId = 'com.deemons.modulerouter'
-//    libraryName = 'annotation'
-//    artifact = 'annotation'
-//
-//    libraryDescription = 'Modularization architecture'
-//
-//    siteUrl = 'https://github.com/Deemonser/MouduleRouter'
-//    gitUrl = 'https://github.com/Deemonser/MouduleRouter.git'
-//    libraryVersion = '1.0.0'
-//
-//    developerId = 'deemons'
-//    developerName = 'deemonser'
-//    developerEmail = 'deemons@hotmail.com'
-//
-//    licenseName = 'The Apache Software License, Version 2.0'
-//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//    allLicenses = ["Apache-2.0"]
-//}
-//
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+
+//添加
+publish {
+    artifactId = 'modulerouter-annotation'
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    uploadName = rootProject.uploadName
+    publishVersion = rootProject.publishVersion
+    desc = rootProject.description
+    website = rootProject.website
+    licences = rootProject.licences
+}
