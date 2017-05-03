@@ -18,7 +18,7 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 
 @AutoService(Processor.class)//自动生成 javax.annotation.processing.IProcessor 文件
-@SupportedSourceVersion(SourceVersion.RELEASE_8)//java版本支持
+@SupportedSourceVersion(SourceVersion.RELEASE_7)//java版本支持
 @SupportedAnnotationTypes({//标注注解处理器支持的注解类型
         "com.deemons.modulerouter.RouterService",
         "com.deemons.modulerouter.RouterLogic",

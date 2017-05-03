@@ -20,6 +20,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+    }
+
 }
 
 dependencies {
@@ -31,6 +38,36 @@ dependencies {
 
     compile project(':annotation')
 }
+
+//// Jar
+//task androidJar(type: Jar) {
+//    dependsOn assemble
+//    group 'Build'
+//    description 'blah blah'
+//    from zipTree(
+//            'build/intermediates/bundles/default/classes.jar')
+//    from zipTree(
+//            '../routerapt/build/libs/routerapt.jar')
+//    from zipTree(
+//            '../annotation/build/libs/annotation.jar')
+//
+//}
+//
+//
+//
+//// javadoc tasks
+//android.libraryVariants.all { variant ->
+//    task("javadoc${variant.name.capitalize()}", type: Javadoc) {
+//        description "Generates Javadoc for $variant.name."
+//        group 'Docs'
+//        source = variant.javaCompile.source
+//        source "../annotation/src/main/java"
+//
+//        exclude '**/BuildConfig.java'
+//        exclude '**/R.java'
+//    }
+//}
+//
 
 
 //添加

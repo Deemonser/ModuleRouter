@@ -6,9 +6,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath 'com.novoda:bintray-release:0.3.4'//添加
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.novoda:bintray-release:0.4.0'//添加
     }
 }
 
@@ -24,7 +25,7 @@ task clean(type: Delete) {
 
 //添加
 ext {
-    userOrg = 'deemonser'
+    userOrg = 'deemons'
     groupId = 'com.deemons'
     uploadName = 'ModuleRouter'
     publishVersion = '1.0.0'
