@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'//添加
+
 
 android {
     compileSdkVersion 25
@@ -21,10 +21,12 @@ android {
         }
     }
 
+
     lintOptions {
         abortOnError false
         warning 'InvalidPackage'
     }
+
 }
 
 dependencies {
@@ -34,18 +36,39 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.9'
 
-    compile project(':annotation')
+    if (Local.toBoolean()) {
+        compile project(':annotation')
+    } else {
+        compile 'com.deemons.modulerouter:annotation:1.0.0'
+    }
+
+}
+
+//for upload
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'modulerouter-core'
+
+    publishedGroupId = 'com.deemons.modulerouter'
+    libraryName = 'core'
+    artifact = 'modulerouter'
+
+    libraryDescription = 'Modularization architecture'
+
+    siteUrl = 'https://github.com/Deemonser/MouduleRouter'
+    gitUrl = 'https://github.com/Deemonser/MouduleRouter.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'deemons'
+    developerName = 'deemonser'
+    developerEmail = 'deemonser@hotmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
 
 
-//添加
-publish {
-    artifactId = 'modulerouter-core'
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    uploadName = rootProject.uploadName
-    publishVersion = rootProject.publishVersion
-    desc = rootProject.description
-    website = rootProject.website
-    licences = rootProject.licences
-}
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

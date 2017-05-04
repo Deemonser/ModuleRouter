@@ -5,10 +5,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
-        classpath 'com.novoda:bintray-release:0.4.0'//添加
+        classpath 'com.android.tools.build:gradle:2.3.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
     }
 }
 
@@ -24,18 +25,24 @@ task clean(type: Delete) {
 
 //添加
 ext {
-    userOrg = 'deemons'
-    groupId = 'com.deemons'
-    uploadName = 'ModuleRouter'
-    publishVersion = '1.0.0'
-    desc = 'An easy to modular development tool library'
-    website = 'https://github.com/Deemonser/MouduleRouter.git'
-    licences = ['Apache-2.0']
+    bintrayRepo = 'maven'
+    publishedGroupId = 'com.deemons.modulerouter' //引用时 第一部分
+    libraryDescription = 'Modularization architecture'//描述
+    siteUrl = 'https://github.com/Deemonser/MouduleRouter'//项目地址
+    gitUrl = 'https://github.com/Deemonser/MouduleRouter.git'//gitUrl
+    developerId = 'deemons'
+    developerName = 'deemonser'
+    developerEmail = 'deemonser@hotmail.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+
 }
 
 allprojects {
     tasks.withType(Javadoc) {
-        options{
+        options {
             encoding "UTF-8"
             charSet 'UTF-8'
             links "http://docs.oracle.com/javase/7/docs/api"
