@@ -6,7 +6,6 @@ import com.deemons.helpe.RouterHelp;
 import com.deemons.inter.IProcessor;
 import com.deemons.modulerouter.RouterAction;
 import com.deemons.modulerouter.RouterLogic;
-import com.deemons.modulerouter.RouterModule;
 import com.deemons.modulerouter.RouterService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -23,7 +22,6 @@ import java.util.Set;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 
 /**
@@ -61,7 +59,7 @@ public class RouterProcessor implements IProcessor {
 
         for (TypeElement typeElement : serviceTypeElements) {
             help.serviceElement = typeElement;
-            help.processName = typeElement.getAnnotation(RouterService.class).processName();
+            help.processName = typeElement.getAnnotation(RouterService.class).value();
         }
 
         //@RouterLogic
@@ -100,19 +98,19 @@ public class RouterProcessor implements IProcessor {
         }
 
         //@RouterModule
-        Set<TypeElement> routerModuleElements = ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(RouterModule.class));
-        for (TypeElement typeElement : routerModuleElements) {
-            RouterHelp.routerHelpers.put(ClassName.get(typeElement).simpleName(), typeElement);
-        }
-
-
-        for (TypeElement typeElement : ElementFilter.typesIn(roundEnv.getRootElements())) {
-            TypeMirror mirror = typeElement.getSuperclass();
-
-            if ("com.deemons.srouter.MaApplication".equals(mirror.toString())) {
-                help.isRootModule = true;
-            }
-        }
+//        Set<TypeElement> routerModuleElements = ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(RouterModule.class));
+//        for (TypeElement typeElement : routerModuleElements) {
+//            RouterHelp.routerHelpers.put(ClassName.get(typeElement).simpleName(), typeElement);
+//        }
+//
+//
+//        for (TypeElement typeElement : ElementFilter.typesIn(roundEnv.getRootElements())) {
+//            TypeMirror mirror = typeElement.getSuperclass();
+//
+//            if ("com.deemons.srouter.MaApplication".equals(mirror.toString())) {
+//                help.isRootModule = true;
+//            }
+//        }
 
         return help;
     }
@@ -153,7 +151,7 @@ public class RouterProcessor implements IProcessor {
 
 
         TypeSpec providerTypeSpec = TypeSpec.classBuilder(routerHelp.routerHelperName)
-                .addAnnotation(RouterModule.class)
+              //  .addAnnotation(RouterModule.class)
                 .addSuperinterface(ClassName.get("com.deemons.modulerouter", "RouterHelper"))
                 .addModifiers(Modifier.PUBLIC)
                 .addField(ClassName.get("com.deemons.modulerouter", "RouterHelper"), "mRouterHelper", Modifier.STATIC)

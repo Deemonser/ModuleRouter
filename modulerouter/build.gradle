@@ -39,36 +39,37 @@ dependencies {
     if (Local.toBoolean()) {
         compile project(':annotation')
     } else {
-        compile 'com.deemons.modulerouter:annotation:1.0.0'
+        compile 'com.deemons.modulerouter:annotation:1.0.2'
     }
 
 }
 
 //for upload
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'modulerouter-core'
 
-    publishedGroupId = 'com.deemons.modulerouter'
-    libraryName = 'core'
-    artifact = 'modulerouter'
+    publishedGroupId = rootProject.publishedGroupId //引用时的第一部分
+    artifact = 'modulerouter'//引用时的第二部分
+    libraryVersion = '1.0.2'//引用时的第三部分
+    libraryName = 'core'//本模块名称
+    bintrayName = 'modulerouter-core'//Jcenter 上显示的项目名
 
-    libraryDescription = 'Modularization architecture'
 
-    siteUrl = 'https://github.com/Deemonser/MouduleRouter'
-    gitUrl = 'https://github.com/Deemonser/MouduleRouter.git'
+    bintrayRepo = rootProject.bintrayRepo
+    libraryDescription = rootProject.libraryDescription
 
-    libraryVersion = '1.0.1'
 
-    developerId = 'deemons'
-    developerName = 'deemonser'
-    developerEmail = 'deemonser@hotmail.com'
 
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    siteUrl =rootProject.siteUrl
+    gitUrl = rootProject.gitUrl
+
+    developerId = rootProject.developerId
+    developerName =rootProject.developerName
+    developerEmail = rootProject.developerEmail
+
+    licenseName = rootProject.licenseName
+    licenseUrl = rootProject.licenseUrl
+    allLicenses = rootProject.allLicenses
 }
-
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

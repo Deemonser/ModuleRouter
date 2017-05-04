@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * date:    2017/4/27
  * desc:
  */
+@Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
 public @interface RouterAction {
 }

@@ -20,6 +20,9 @@ import javax.tools.Diagnostic;
 @AutoService(Processor.class)//自动生成 javax.annotation.processing.IProcessor 文件
 @SupportedSourceVersion(SourceVersion.RELEASE_7)//java版本支持
 @SupportedAnnotationTypes({//标注注解处理器支持的注解类型
+        "com.deemons.activityrouter.Extra",
+        "com.deemons.activityrouter.Router",
+        "com.deemons.activityrouter.SceneTransition",
         "com.deemons.modulerouter.RouterService",
         "com.deemons.modulerouter.RouterLogic",
         "com.deemons.modulerouter.RouterAction"
@@ -36,6 +39,7 @@ public class AnnotationProcessor extends AbstractProcessor{
         mFiler = processingEnv.getFiler();
         mElements = processingEnv.getElementUtils();
         mMessager = processingEnv.getMessager();
+        //new RouterActivityProcessor().process(roundEnv,this);
         new RouterProcessor().process(roundEnv, this);
         return true;
     }

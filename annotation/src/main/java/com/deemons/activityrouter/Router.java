@@ -1,4 +1,4 @@
-package com.deemons.modulerouter;
+package com.deemons.activityrouter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,11 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * author： deemons
- * date:    2017/4/30
- * desc:
+ * Created by baixiaokang on 16/12/30.
  */
+@Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
-public @interface RouterModule {
+public @interface Router {
+    String value();
 }

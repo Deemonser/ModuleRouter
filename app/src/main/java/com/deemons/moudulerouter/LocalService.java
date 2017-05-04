@@ -9,6 +9,6 @@ import com.deemons.modulerouter.router.LocalRouterConnectService;
  * 包名       com.deemons.moudulerouter
  * 描述
  */
-@RouterService(processName = "com.deemons.moudulerouter")
+@RouterService("com.deemons.moudulerouter")
 public class LocalService extends LocalRouterConnectService {
 }

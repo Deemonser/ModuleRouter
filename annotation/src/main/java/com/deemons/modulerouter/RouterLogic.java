@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * 描述
  */
 
+@Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.CLASS)
 public @interface RouterLogic {
     String processName();
     int Priority();

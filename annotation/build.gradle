@@ -1,5 +1,5 @@
 apply plugin: 'java'
-//apply plugin: 'bintray-release'//添加
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -13,12 +13,12 @@ targetCompatibility = "1.7"
 //
 //    publishedGroupId = rootProject.publishedGroupId //引用时的第一部分
 //    artifact = 'annotation'//引用时的第二部分
-//    libraryVersion = '1.0.0'//引用时的第三部分
-//    libraryName = 'annotation'//未知用途
+//    libraryVersion = '1.0.2'//引用时的第三部分
+//    libraryName = 'annotation'//本模块名称
 //    bintrayName = 'modulerouter-annotation'//Jcenter 上显示的项目名
-
-
-//    bintrayRepo = rootProject.userOrg
+//
+//
+//    bintrayRepo = rootProject.bintrayRepo
 //    libraryDescription = rootProject.libraryDescription
 //
 //

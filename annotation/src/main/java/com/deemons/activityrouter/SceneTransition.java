@@ -1,4 +1,4 @@
-package com.deemons.modulerouter;
+package com.deemons.activityrouter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,13 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * author： deemons
- * date:    2017/4/27
- * desc:
+ * Created by baixiaokang on 16/12/30.
  */
 
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
-public @interface RouterService {
-    String value();//服务所在进程名称
+@Target(ElementType.FIELD)
+public @interface SceneTransition {
+    String value();
 }

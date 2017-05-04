@@ -32,7 +32,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile project(':modulerouter')
-    annotationProcessor project(':routerapt')
+    compile 'com.deemons.modulerouter:modulerouter:1.0.2'
+    annotationProcessor 'com.deemons.modulerouter:routerapt:1.0.2'
 
 }
