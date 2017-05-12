@@ -49,7 +49,7 @@ ext {
 
     publishedGroupId = rootProject.publishedGroupId //引用时的第一部分
     artifact = 'modulerouter'//引用时的第二部分
-    libraryVersion = '1.0.2'//引用时的第三部分
+    libraryVersion = '1.0.3'//引用时的第三部分
     libraryName = 'core'//本模块名称
     bintrayName = 'modulerouter-core'//Jcenter 上显示的项目名
 
