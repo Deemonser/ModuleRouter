@@ -1,4 +1,4 @@
-package com.deemons.moudulerouter;
+package com.deemons.sample;
 
 import com.deemons.modulerouter.RouterLogic;
 import com.deemons.modulerouter.multiprocess.BaseApplicationLogic;
@@ -9,6 +9,12 @@ import com.deemons.modulerouter.multiprocess.BaseApplicationLogic;
  * 包名       com.deemons.moudulerouter
  * 描述
  */
-@RouterLogic(processName = "com.deemons.moudulerouter",Priority = 999,moduleName = "main")
+@RouterLogic(processName = "com.deemons.sample",Priority = 999)
 public class MainLogic extends BaseApplicationLogic {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+
+    }
 }

@@ -16,6 +16,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface RouterLogic {
     String processName();
-    int Priority();
-    String moduleName();
+    int Priority(); //优先级
 }

@@ -4,10 +4,10 @@ dependencies {
     compile 'com.google.auto.service:auto-service:1.0-rc2'
     compile 'com.squareup:javapoet:1.4.0'
 
-    if (Local.toBoolean()){
+    if (isDebug.toBoolean()){
         compile project(':annotation')
     }else{
-        compile 'com.deemons.modulerouter:annotation:1.0.2'
+        compile 'com.deemons.modulerouter:annotation:1.0.5'
     }
 }
 
@@ -20,7 +20,7 @@ ext {
 
     publishedGroupId = rootProject.publishedGroupId //引用时的第一部分
     artifact = 'routerapt'//引用时的第二部分
-    libraryVersion = '1.0.3'//引用时的第三部分
+    libraryVersion = '1.0.4'//引用时的第三部分
     libraryName = 'apt'//本模块名称
     bintrayName = 'modulerouter-apt'//Jcenter 上显示的项目名
 

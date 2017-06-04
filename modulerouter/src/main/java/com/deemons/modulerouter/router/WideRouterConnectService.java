@@ -9,10 +9,6 @@ import android.support.annotation.Nullable;
 import com.deemons.modulerouter.MaApplication;
 import com.deemons.modulerouter.tools.Logger;
 
-/**
- * Created by wanglei on 2016/11/29.
- */
-
 public final class WideRouterConnectService extends Service {
     private static final String TAG = "WideRouterConnectService";
 

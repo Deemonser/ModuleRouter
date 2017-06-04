@@ -29,6 +29,7 @@ android {
 
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -36,10 +37,10 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.9'
 
-    if (Local.toBoolean()) {
+    if (isDebug.toBoolean()){
         compile project(':annotation')
-    } else {
-        compile 'com.deemons.modulerouter:annotation:1.0.2'
+    }else{
+        compile 'com.deemons.modulerouter:annotation:1.0.5'
     }
 
 }
@@ -49,7 +50,7 @@ ext {
 
     publishedGroupId = rootProject.publishedGroupId //引用时的第一部分
     artifact = 'modulerouter'//引用时的第二部分
-    libraryVersion = '1.0.3'//引用时的第三部分
+    libraryVersion = '1.0.4'//引用时的第三部分
     libraryName = 'core'//本模块名称
     bintrayName = 'modulerouter-core'//Jcenter 上显示的项目名
 

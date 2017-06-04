@@ -13,6 +13,8 @@ import javax.lang.model.element.TypeElement;
 
 public class RouterHelp {
 
+    public static final String KEY_MODULE_NAME = "moduleName";
+
     public String processName;
 
     public String moduleName;

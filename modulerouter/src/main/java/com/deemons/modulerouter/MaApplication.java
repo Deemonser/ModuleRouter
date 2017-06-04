@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.deemons.modulerouter.multiprocess.BaseApplicationLogic;
 import com.deemons.modulerouter.multiprocess.PriorityLogicWrapper;
@@ -14,15 +15,21 @@ import com.deemons.modulerouter.router.WideRouter;
 import com.deemons.modulerouter.router.WideRouterApplicationLogic;
 import com.deemons.modulerouter.router.WideRouterConnectService;
 import com.deemons.modulerouter.tools.Logger;
+import com.deemons.modulerouter.tools.PackageUtils;
 import com.deemons.modulerouter.tools.ProcessUtil;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public abstract class MaApplication extends Application {
+public class MaApplication extends Application {
+    private static final String packgePath = "com.deemons.modulerouter.apt";
+
     private static final String TAG = "MaApplication";
     private static MaApplication sInstance;
     private ArrayList<RouterHelper> mRouterHelpers;
@@ -54,7 +61,11 @@ public abstract class MaApplication extends Application {
                     if (mProviderMap.get(precessName) != null) {
                         for (MaProvider maProvider : mProviderMap.get(precessName)) {
                             LocalRouter.getInstance().registerProvider(maProvider.getName(), maProvider);
-                            for (MaAction maAction : mActionMap.get(precessName + "_" + maProvider.getName())) {
+                            ArrayList<MaAction> actions = mActionMap.get(precessName + "_" + maProvider.getName());
+                            if (actions == null) {
+                                continue;
+                            }
+                            for (MaAction maAction : actions) {
                                 maProvider.registerAction(maAction.getClass().getSimpleName(), maAction);
                             }
                         }
@@ -83,7 +94,35 @@ public abstract class MaApplication extends Application {
         }
     }
 
-    protected abstract void initRouter(ArrayList<RouterHelper> mRouterHelpers);
+    private void initRouter(ArrayList<RouterHelper> mRouterHelpers) {
+
+        List<Class> classList = PackageUtils.getClasses(this,packgePath);
+
+        Log.d(TAG, "classList.size=" + classList.size());
+
+        for (Class aClass : classList) {
+
+            if (!aClass.getSimpleName().contains("RouterHelper")) {
+                continue;
+            }
+
+
+            Method method = null;
+            try {
+                method = aClass.getMethod("newInstance",ArrayList.class);
+                method.invoke(null, mRouterHelpers);
+
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
 
 
     protected void startWideRouter() {

@@ -11,5 +11,5 @@ import javax.annotation.processing.RoundEnvironment;
  */
 
 public interface IProcessor {
-    void process(RoundEnvironment roundEnv, AnnotationProcessor mAbstractProcessor);
+    void process(RoundEnvironment roundEnv, AnnotationProcessor processor, String moduleName);
 }

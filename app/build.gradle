@@ -4,12 +4,18 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.deemons.moudulerouter"
+        applicationId "com.deemons.sample"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -21,6 +27,9 @@ android {
         abortOnError false
         warning 'InvalidPackage'
     }
+
+
+
 }
 
 dependencies {
@@ -28,11 +37,16 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.deemons.modulerouter:modulerouter:1.0.2'
-    annotationProcessor 'com.deemons.modulerouter:routerapt:1.0.2'
 
+//    compile 'com.deemons.modulerouter:modulerouter:1.0.3'
+//    annotationProcessor 'com.deemons.modulerouter:routerapt:1.0.3'
+
+    compile project(':modulerouter')
+    annotationProcessor project(':routerapt')
 }

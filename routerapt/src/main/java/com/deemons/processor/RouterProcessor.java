@@ -33,12 +33,14 @@ import javax.lang.model.util.ElementFilter;
 public class RouterProcessor implements IProcessor {
 
 
+    private static final String packageName = "com.deemons.modulerouter";
+
+
     @Override
-    public void process(RoundEnvironment roundEnv, AnnotationProcessor processor) {
-        processor.debug("RouterProcessor =======================");
+    public void process(RoundEnvironment roundEnv, AnnotationProcessor processor, String moduleName) {
 
 
-        RouterHelp routerHelp = gatherInfo(roundEnv, processor);
+        RouterHelp routerHelp = gatherInfo(roundEnv, processor,moduleName);
 
         buildProviderClass(roundEnv, processor, routerHelp);
         buildModuleHelper(roundEnv, processor, routerHelp);
@@ -48,7 +50,7 @@ public class RouterProcessor implements IProcessor {
     }
 
     //收集信息
-    private RouterHelp gatherInfo(RoundEnvironment roundEnv, AnnotationProcessor processor) {
+    private RouterHelp gatherInfo(RoundEnvironment roundEnv, AnnotationProcessor processor, String moduleName) {
         RouterHelp help = new RouterHelp();
 
         //@RouterService
@@ -66,23 +68,25 @@ public class RouterProcessor implements IProcessor {
         Set<TypeElement> logicTypeElements = ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(RouterLogic.class));
         if (logicTypeElements.size() > 1) {
             throw new RuntimeException("@RouterLogic 在一个 module 中最多只能有一个");
-        }
+        } else if (logicTypeElements.iterator().hasNext()) {
+            TypeElement typeElement = logicTypeElements.iterator().next();
 
-        for (TypeElement typeElement : logicTypeElements) {
             RouterLogic annotation = typeElement.getAnnotation(RouterLogic.class);
 
             if (help.processName != null && !annotation.processName().equals(help.processName)) {
                 throw new RuntimeException("同一 module 中，@RouterService 与 @RouterLogic 所在进程不同");
             }
 
-
             help.logicElement = typeElement;
-            help.moduleName = annotation.moduleName();
+            help.moduleName = moduleName;
             help.priority = annotation.Priority();
             help.processName = annotation.processName();
             help.providerName = captureName(help.moduleName) + "Provider";
             help.routerHelperName = "RouterHelper" + captureName(help.moduleName);
         }
+
+
+
 
 
         //@RouterAction
@@ -128,7 +132,7 @@ public class RouterProcessor implements IProcessor {
                 .returns(String.class);
 
         TypeSpec providerTypeSpec = TypeSpec.classBuilder(routerHelp.providerName)
-                .superclass(ClassName.get("com.deemons.modulerouter", "MaProvider"))
+                .superclass(ClassName.get(packageName, "MaProvider"))
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(builder.build())
                 .build();
@@ -152,9 +156,9 @@ public class RouterProcessor implements IProcessor {
 
         TypeSpec providerTypeSpec = TypeSpec.classBuilder(routerHelp.routerHelperName)
               //  .addAnnotation(RouterModule.class)
-                .addSuperinterface(ClassName.get("com.deemons.modulerouter", "RouterHelper"))
+                .addSuperinterface(ClassName.get(packageName, "RouterHelper"))
                 .addModifiers(Modifier.PUBLIC)
-                .addField(ClassName.get("com.deemons.modulerouter", "RouterHelper"), "mRouterHelper", Modifier.STATIC)
+                .addField(ClassName.get(packageName, "RouterHelper"), "mRouterHelper", Modifier.STATIC)
                 .addMethod(MethodSpec.constructorBuilder().addModifiers(Modifier.PRIVATE).build())
                 .addMethod(getNewInstanceMethod(roundEnv, processor, routerHelp))
                 .addMethod(getInjectServiceMethod(roundEnv, processor, routerHelp))
@@ -176,7 +180,7 @@ public class RouterProcessor implements IProcessor {
                 .returns(TypeName.VOID)
                 .addParameter(ParameterizedTypeName.get(
                         ClassName.get(ArrayList.class),
-                        ClassName.get("com.deemons.modulerouter", "RouterHelper"))
+                        ClassName.get(packageName, "RouterHelper"))
                         , "mRouterHelpers");
 
         builder.beginControlFlow("if (mRouterHelper == null)")
@@ -205,7 +209,7 @@ public class RouterProcessor implements IProcessor {
         MethodSpec.Builder builder = MethodSpec.methodBuilder("injectLogic")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(TypeName.VOID)
-                .addParameter(ClassName.get("com.deemons.modulerouter", "MaApplication"), "maApplication")
+                .addParameter(ClassName.get(packageName, "MaApplication"), "maApplication")
                 .addStatement("maApplication.registerApplicationLogic($S, $L,$L.class)", routerHelp.processName, routerHelp.priority, routerHelp.logicElement);
 
         return builder.build();
@@ -220,11 +224,11 @@ public class RouterProcessor implements IProcessor {
                 .returns(TypeName.VOID)
                 .addParameter(ParameterizedTypeName.get(ClassName.get(HashMap.class),
                         ClassName.get(String.class),
-                        ParameterizedTypeName.get(ClassName.get(ArrayList.class), ClassName.get("com.deemons.modulerouter", "MaProvider"))
+                        ParameterizedTypeName.get(ClassName.get(ArrayList.class), ClassName.get(packageName, "MaProvider"))
                 ), "providerMap")
                 .addParameter(ParameterizedTypeName.get(ClassName.get(HashMap.class),
                         ClassName.get(String.class),
-                        ParameterizedTypeName.get(ClassName.get(ArrayList.class), ClassName.get("com.deemons.modulerouter", "MaAction"))
+                        ParameterizedTypeName.get(ClassName.get(ArrayList.class), ClassName.get(packageName, "MaAction"))
                 ), "actionMap");
 
         ClassName providerClass = ClassName.get("com.deemons.modulerouter.apt", captureName(routerHelp.moduleName) + "Provider");

@@ -1,4 +1,4 @@
-package com.deemons.moudulerouter;
+package com.deemons.sample;
 
 import com.deemons.modulerouter.RouterService;
 import com.deemons.modulerouter.router.LocalRouterConnectService;
@@ -9,6 +9,6 @@ import com.deemons.modulerouter.router.LocalRouterConnectService;
  * 包名       com.deemons.moudulerouter
  * 描述
  */
-@RouterService("com.deemons.moudulerouter")
+@RouterService("com.deemons.sample")
 public class LocalService extends LocalRouterConnectService {
 }
