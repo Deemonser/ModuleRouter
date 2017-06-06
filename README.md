@@ -5,11 +5,16 @@ An easy to modular development tool library
 使用
 
 1. 在 gradle 中添加依赖
+
        compile 'com.deemons.modulerouter:modulerouter:xxx'
        annotationProcessor 'com.deemons.modulerouterapt:xxx'
+
 2. 在AndroidManifest中使用MaApplication
+
        android:name="com.deemons.modulerouter.MaApplication"
+
 3. 每个 Module 中，新建 MainLogic ，它取代了 Application 的功能
+
        @RouterLogic(processName = "com.deemons.sample",Priority = 999)
        public class MainLogic extends BaseApplicationLogic {
            @Override
@@ -19,11 +24,15 @@ An easy to modular development tool library
        
            }
        }
+
 4. 如果需要 多线程，新建 LcalService
+
        @RouterService("com.deemons.sample")
        public class LocalService extends LocalRouterConnectService {
        }
+
 5. 提供本模块的 Action
+
        @RouterAction
        public class PlayAction implements MaAction<String> {
            @Override
@@ -41,7 +50,9 @@ An easy to modular development tool library
                        .build();
            }
        }
+
 6. 调用
+
        LocalRouter.getInstance()
             .rxRoute(this, new RouterRequest()
                    .domain("com.deemons.sample")
@@ -51,7 +62,6 @@ An easy to modular development tool library
              .subscribe(new Consumer<MaActionResult>() {
                 @Override
                 public void accept(@NonNull MaActionResult maActionResult) throws Exception {
-                               
                 }
               });
    
